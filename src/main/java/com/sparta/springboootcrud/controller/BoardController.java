@@ -42,8 +42,8 @@ public class BoardController {
 
 //        게시글 비밀번호 확인 API
 //        - 비밀번호를 입력 받아 해당 게시글의 비밀번호와 일치여부 판단하기
-    @PutMapping("/api/boards/{id}/{password}")
-    public Boolean confirmPassword(@PathVariable Long id, @PathVariable String password) {
+    @PostMapping("/api/boards/{id}")
+    public Boolean confirmPassword(@PathVariable Long id, @RequestBody String password) {
         return boardService.search(id).getPassword().equals(password);
     }
 
