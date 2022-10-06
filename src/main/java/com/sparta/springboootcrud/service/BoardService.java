@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -30,4 +31,17 @@ public class BoardService {
         );
     }
 
+    public List<Board> getDescBoardList() {
+        return boardRepository.findAllByOrderByModifiedAtDesc();
+    }
+
+    public BoardRequestDto createBoard(BoardRequestDto requestDto) {
+        Board board = new Board(requestDto);
+        boardRepository.save(board);
+        return requestDto;
+    }
+
+    public void deleteBoard(Long id) {
+        boardRepository.deleteById(id);
+    }
 }
